@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: server-config
 data:
+  URL_FOR_INIT: "https://www.google.com/"
   ENABLE_FEATURE_1: "true"
   ENABLE_FEATURE_2: "false"
   APPCONF: |

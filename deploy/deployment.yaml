@@ -12,6 +12,13 @@ spec:
       labels:
         app: server
     spec:
+      initContainers:
+      - name: curl-somewhere
+        image: curlimages/curl:7.68.0
+        args: ["-v", "$(URL_FOR_INIT)"]
+        envFrom:
+        - configMapRef:
+            name: server-config
       containers:
       - name: server
         image: server:latest
