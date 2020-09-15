@@ -1,2 +1,2 @@
 docker build -t server:latest .
-kubectl apply -f deploy/
+helm upgrade server ./deploy/server --install -f ./deploy/server/values.yaml

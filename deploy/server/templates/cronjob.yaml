@@ -17,3 +17,4 @@ spec:
             - -c
             - curl -v ${SERVER_SERVICE_HOST}:${SERVER_SERVICE_PORT}/name
           restartPolicy: OnFailure
+
