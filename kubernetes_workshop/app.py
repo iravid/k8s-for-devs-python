@@ -1,4 +1,5 @@
 from flask import Flask
+import os
 
 app = Flask(__name__)
 
@@ -9,3 +10,8 @@ def root():
 @app.route('/health')
 def health():
     return 'OK'
+
+@app.route('/name')
+def name():
+    return f'Hello from {os.getenv("POD_NAME")}\n'
+
