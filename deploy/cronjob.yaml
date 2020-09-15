@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: server-trigger
+spec:
+  schedule: "*/4 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: curl
+            image: curlimages/curl:7.68.0
+            command: ["/bin/sh"]
+            args:
+            - -c
+            - curl -v ${SERVER_SERVICE_HOST}:${SERVER_SERVICE_PORT}/name
+          restartPolicy: OnFailure
