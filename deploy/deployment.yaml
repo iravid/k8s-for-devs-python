@@ -24,6 +24,15 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        - name: ENABLE_FEATURE
+          valueFrom:
+            configMapKeyRef:
+              name: server-config
+              key: ENABLE_FEATURE_1
+        envFrom:
+        - configMapRef:
+            name: server-config
+          prefix: ENV_FROM_
         livenessProbe:
           httpGet:
             path: /health
@@ -34,8 +43,11 @@ spec:
           httpGet:
             path: /ready
             port: http
-          initialDelaySeconds: 5
           periodSeconds: 5
-        resources:
-          requests:
-            cpu: "16000m"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+      volumes:
+      - name: config-volume
+        configMap:
+          name: server-config
