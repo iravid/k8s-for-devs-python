@@ -1,10 +1,8 @@
 from flask import Flask
 
 import os
-import time
 
 app = Flask(__name__)
-threshold = time.time() + 30
 
 @app.route('/')
 def root():
@@ -16,10 +14,7 @@ def health():
 
 @app.route('/ready')
 def ready():
-    if time.time() >= threshold:
-        return 'OK'
-    else:
-        raise Exception('Not ready')
+    return 'OK'
 
 @app.route('/name')
 def name():
